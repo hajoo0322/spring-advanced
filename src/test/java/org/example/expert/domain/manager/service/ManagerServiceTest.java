@@ -46,7 +46,7 @@ class ManagerServiceTest {
         given(todoRepository.findById(todoId)).willReturn(Optional.empty());
 
         // when & then
-        InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> managerService.getManagers(todoId));
+        InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> managerService.findByManagers(todoId));
         assertEquals("Manager not found", exception.getMessage());
     }
 
@@ -87,7 +87,7 @@ class ManagerServiceTest {
         given(managerRepository.findAllByTodoId(todoId)).willReturn(managerList);
 
         // when
-        List<ManagerResponse> managerResponses = managerService.getManagers(todoId);
+        List<ManagerResponse> managerResponses = managerService.findByManagers(todoId);
 
         // then
         assertEquals(1, managerResponses.size());

@@ -29,7 +29,7 @@ public class CommentService {
     public CommentSaveResponse saveComment(AuthUser authUser, long todoId, CommentSaveRequest commentSaveRequest) {
         User user = User.fromAuthUser(authUser);
         Todo todo = todoRepository.findById(todoId).orElseThrow(() ->
-                new InvalidRequestException("Todo not found"));
+                new InvalidRequestException("투두를 찾을수 없습니다."));
 
         Comment newComment = new Comment(
                 commentSaveRequest.getContents(),
@@ -46,7 +46,7 @@ public class CommentService {
         );
     }
 
-    public List<CommentResponse> getComments(long todoId) {
+    public List<CommentResponse> findByComments(long todoId) {
         List<Comment> commentList = commentRepository.findAllByTodoId(todoId);
 
         List<CommentResponse> dtoList = new ArrayList<>();
